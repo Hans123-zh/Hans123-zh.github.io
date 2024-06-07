@@ -1,0 +1,387 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/assets/favicon-16x16.png?v=2.8.0" type="image/png" sizes="16x16"><link rel="icon" href="/assets/favicon-32x32.png?v=2.8.0" type="image/png" sizes="32x32"><meta name="description" content="在做毕设时，出现了2024-06-05T16:55:10.000Z的这种类型的时间数据，需要处理成2024-06-05 16:55:10。记录一下处理方法。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="毕设知识总结——时间数据处理">
+<meta property="og:url" content="http://example.com/2024/06/05/%E6%AF%95%E8%AE%BE%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="人生逐梦正当时">
+<meta property="og:description" content="在做毕设时，出现了2024-06-05T16:55:10.000Z的这种类型的时间数据，需要处理成2024-06-05 16:55:10。记录一下处理方法。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-06-05T08:55:10.000Z">
+<meta property="article:modified_time" content="2024-06-07T08:46:34.992Z">
+<meta property="article:author" content="Hans">
+<meta property="article:tag" content="js">
+<meta name="twitter:card" content="summary"><title>毕设知识总结——时间数据处理 | 人生逐梦正当时</title><link ref="canonical" href="http://example.com/2024/06/05/%E6%AF%95%E8%AE%BE%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.8.0"><link rel="stylesheet" href="css/custom.css"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: false,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: true,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"复制","copySuccess":"复制成功","copyError":"复制失败"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 6.3.0"></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">首页</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">归档</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/categories/"><span class="header-nav-menu-item__icon"><i class="fas fa-layer-group"></i></span><span class="header-nav-menu-item__text">分类</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">标签</span></a></div></div><div class="header-nav-search"><span class="header-nav-search__icon"><i class="fas fa-search"></i></span><span class="header-nav-search__text">搜索</span></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner" style="background: url(https://p4.itc.cn/images01/20210420/78dbc04704514a2281aad8954c5224ad.jpeg) no-repeat center/cover;"><div class="header-banner-info"><div class="header-banner-info__title">人生逐梦正当时</div><div class="header-banner-info__subtitle">人生在勤，不索何获？</div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">毕设知识总结——时间数据处理</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon" data-popover="发表时间" data-popover-pos="up"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__value">2024-06-05</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon" data-popover="修改时间" data-popover-pos="up"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__value">2024-06-07</span></span><span class="post-meta-item post-meta-item--wordcount"><span class="post-meta-item__icon" data-popover="字数统计" data-popover-pos="up"><i class="far fa-file-word"></i></span><span class="post-meta-item__value">577</span></span><span class="post-meta-item post-meta-item--readtime"><span class="post-meta-item__icon" data-popover="阅读时间" data-popover-pos="up"><i class="far fa-clock"></i></span><span class="post-meta-item__value">4分</span></span></div></header><div class="post-body"><p>在做毕设时，出现了<code>2024-06-05T16:55:10.000Z</code>的这种类型的时间数据，需要处理成<code>2024-06-05 16:55:10</code>。记录一下处理方法。<span id="more"></span></p>
+
+        <h2 id="安装-dayjs"   >
+          <a href="#安装-dayjs" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#安装-dayjs"></a> 安装 <code>dayjs</code></h2>
+      
+<p><code>dayjs</code> 是一个轻量级的日期处理库。使用 <code>dayjs</code> 需要首先安装它，并在项目中引入。</p>
+<p>使用 npm 或 yarn 安装 <code>dayjs</code>：</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install dayjs</span><br></pre></td></tr></table></div></figure>
+<p>或</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add dayjs</span><br></pre></td></tr></table></div></figure>
+
+        <h2 id="引入-dayjs"   >
+          <a href="#引入-dayjs" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#引入-dayjs"></a> 引入 <code>dayjs</code></h2>
+      
+<p>在 JavaScript 文件中引入 <code>dayjs</code>：</p>
+<figure class="highlight js"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> dayjs <span class="keyword">from</span> <span class="string">&#x27;dayjs&#x27;</span>;</span><br></pre></td></tr></table></div></figure>
+<p>如果在 Vue 组件中使用，可以在组件的 <code>methods</code> 中定义 <code>timeChange</code> 函数，并将 <code>dayjs</code> 作为一个全局引用或直接在方法中使用：</p>
+<figure class="highlight js"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> dayjs <span class="keyword">from</span> <span class="string">&#x27;dayjs&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="attr">methods</span>: &#123;</span><br><span class="line">    <span class="title function_">timeChange</span>(<span class="params">data</span>) &#123;</span><br><span class="line">      <span class="keyword">let</span> time = data;</span><br><span class="line">      time = <span class="title function_">dayjs</span>(time).<span class="title function_">format</span>(<span class="string">&#x27;YYYY-MM-DD HH:mm:ss&#x27;</span>);</span><br><span class="line">      <span class="keyword">return</span> time;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+
+        <h3 id="代码解释"   >
+          <a href="#代码解释" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#代码解释"></a> 代码解释：</h3>
+      
+
+        <h4 id="变量赋值"   >
+          <a href="#变量赋值" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#变量赋值"></a> 变量赋值</h4>
+      
+<ul>
+<li><code>let time = data;</code>：将传入的参数 <code>data</code> 赋值给变量 <code>time</code>。</li>
+</ul>
+
+        <h4 id="使用-dayjs-库进行格式化"   >
+          <a href="#使用-dayjs-库进行格式化" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#使用-dayjs-库进行格式化"></a> 使用 <code>dayjs</code> 库进行格式化</h4>
+      
+<ul>
+<li><code>time = this.dayjs(time).format('YYYY-MM-DD HH:mm:ss');</code>
+<ul>
+<li><code>this.dayjs(time)</code>：假设 <code>dayjs</code> 是一个已经在当前上下文中引用的库（通常在 Vue 组件中使用 <code>this</code> 引用库函数），通过 <code>dayjs</code> 将传入的 <code>time</code> 转换为一个 <code>dayjs</code> 对象。</li>
+<li><code>.format('YYYY-MM-DD HH:mm:ss')</code>：使用 <code>dayjs</code> 对象的 <code>format</code> 方法将日期时间格式化为指定的字符串格式</li>
+<li><code>YYYY-MM-DD HH:mm:ss</code>，其中：
+<ul>
+<li><code>YYYY</code>：表示四位数的年份。</li>
+<li><code>MM</code>：表示两位数的月份。</li>
+<li><code>DD</code>：表示两位数的日期。</li>
+<li><code>HH</code>：表示两位数的小时（24小时制）。</li>
+<li><code>mm</code>：表示两位数的分钟。</li>
+<li><code>ss</code>：表示两位数的秒钟。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        <h4 id="返回格式化后的时间字符串"   >
+          <a href="#返回格式化后的时间字符串" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#返回格式化后的时间字符串"></a> 返回格式化后的时间字符串</h4>
+      
+<ul>
+<li><code>return time;</code>：返回格式化后的时间字符串。</li>
+</ul>
+<p>这样，你就可以在 Vue 组件中使用 <code>timeChange</code> 方法来格式化日期时间数据。</p>
+
+        <h2 id="数据处理"   >
+          <a href="#数据处理" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#数据处理"></a> 数据处理</h2>
+      
+<p>定义完函数后在vue中直接引用即可。</p>
+<figure class="highlight plaintext"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;el-table-column prop=&quot;timebegin&quot; label=&quot;开始时间&quot; width=&quot;150&quot;&gt;</span><br><span class="line">  &lt;template slot-scope=&quot;scope&quot;&gt;</span><br><span class="line">    &#123;&#123; timeChange(scope.row.timebegin) &#125;&#125;</span><br><span class="line">  &lt;/template&gt;</span><br><span class="line">&lt;/el-table-column&gt;</span><br><span class="line">&lt;el-table-column prop=&quot;timeend&quot; label=&quot;截止时间&quot; width=&quot;150&quot;&gt;</span><br><span class="line">  &lt;template slot-scope=&quot;scope&quot;&gt;</span><br><span class="line">    &#123;&#123; timeChange(scope.row.timeend) &#125;&#125;</span><br><span class="line">  &lt;/template&gt;</span><br><span class="line">&lt;/el-table-column&gt;</span><br></pre></td></tr></table></div></figure>
+
+        <h2 id="参考"   >
+          <a href="#参考" class="heading-link"><i class="fas fa-link"></i></a><a class="markdownIt-Anchor" href="#参考"></a> 参考</h2>
+      
+<p><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_57066052/article/details/120116875?spm=1001.2014.3001.5506" >当我们遇到从后台获取的日期格式是2020-09-29T18:02:02.000Z如何转_2020-10-19t03:23:10.405z转换-CSDN博客</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文结束，感谢您的阅读 ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">本文作者: </span><span class="copyright-author__value"><a href="http://example.com">Hans</a></span></div><div class="copyright-link"><span class="copyright-link__name">本文链接: </span><span class="copyright-link__value"><a href="http://example.com/2024/06/05/%E6%AF%95%E8%AE%BE%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/">http://example.com/2024/06/05/%E6%AF%95%E8%AE%BE%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">版权声明: </span><span class="copyright-notice__value">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="external nofollow" target="_blank">BY-NC-SA</a> 许可协议。转载请注明出处！</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="http://example.com/tags/js/">js</a></span></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/2024/06/07/%E5%AE%9E%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93-%E6%A0%B9%E6%8D%AEapplication-yml%E4%BD%BF%E7%94%A8navicat%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">实习知识总结——根据application.yml使用navicat远程连接数据库</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/2024/06/05/%E5%AE%9E%E4%B9%A0%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93%E2%80%94%E2%80%94vue%E7%9A%84%E5%90%84%E7%A7%8D%E5%B1%9E%E6%80%A7/"><span class="paginator-prev__text">实习知识总结——vue的各种属性</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目录</span><span class="sidebar-nav-ov">站点概览</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-dayjs"><span class="toc-number">1.</span> <span class="toc-text">
+           安装 dayjs</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E5%85%A5-dayjs"><span class="toc-number">2.</span> <span class="toc-text">
+           引入 dayjs</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E8%A7%A3%E9%87%8A"><span class="toc-number">2.1.</span> <span class="toc-text">
+           代码解释：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%98%E9%87%8F%E8%B5%8B%E5%80%BC"><span class="toc-number">2.1.1.</span> <span class="toc-text">
+           变量赋值</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-dayjs-%E5%BA%93%E8%BF%9B%E8%A1%8C%E6%A0%BC%E5%BC%8F%E5%8C%96"><span class="toc-number">2.1.2.</span> <span class="toc-text">
+           使用 dayjs 库进行格式化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%90%8E%E7%9A%84%E6%97%B6%E9%97%B4%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-number">2.1.3.</span> <span class="toc-text">
+           返回格式化后的时间字符串</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86"><span class="toc-number">3.</span> <span class="toc-text">
+           数据处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-number">4.</span> <span class="toc-text">
+           参考</span></a></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="https://img2.baidu.com/it/u=1168706137,3714784813&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=500&amp;h=500" alt="avatar"></div><p class="sidebar-ov-author__text">那些过去的眼泪终将风干在记忆里。</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">16</div><div class="sidebar-ov-state-item__name">归档</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--categories" href="/categories/"><div class="sidebar-ov-state-item__count">14</div><div class="sidebar-ov-state-item__name">分类</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--tags" href="/tags/"><div class="sidebar-ov-state-item__count">14</div><div class="sidebar-ov-state-item__name">标签</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank" rel="noopener" data-popover="知识共享许可协议" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已阅读了 </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2024</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Hans</span></div><div><span>由 <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> 强力驱动</span><span> v6.3.0</span><span class="footer__devider">|</span><span>主题 - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.8.0</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><div class="search-mask"></div><div class="search-popup"><span class="search-close"></span><div class="search-input"><input placeholder="搜索文章（支持多关键词，请用空格分隔）"></div><div class="search-results"></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="https://cdn.jsdelivr.net/npm/lazyload@2.0.0-rc.2/lazyload.min.js"></script><script>function initSearch() {
+  var isXML = true;
+  var search_path = 'search.json';
+
+  if (!search_path) {
+    search_path = 'search.xml';
+  } else if (/json$/i.test(search_path)) {
+    isXML = false;
+  }
+
+  var path = '/' + search_path;
+  $.ajax({
+    url: path,
+    dataType: isXML ? 'xml' : 'json',
+    async: true,
+    success: function (res) {
+      var datas = isXML ? $('entry', res).map(function () {
+        // 将 XML 转为 JSON
+        return {
+          title: $('title', this).text(),
+          content: $('content', this).text(),
+          url: $('url', this).text()
+        };
+      }).get() : res;
+      var $input = $('.search-input input');
+      var $result = $('.search-results');
+      // 搜索对象（标题、内容）的权重，影响显示顺序
+      var WEIGHT = { title: 100, content: 1 };
+      var searchPost = function () {
+        var searchText = $input.val().toLowerCase().trim();
+        // 根据空白字符分隔关键字
+        var keywords = searchText.split(/[\s]+/);
+        // 搜索结果
+        var matchPosts = [];
+
+        // 有多个关键字时，将原文字整个保存下来
+        if (keywords.length > 1) {
+          keywords.push(searchText);
+        }
+        // 防止未输入字符时搜索
+        if (searchText.length > 0) {
+          datas.forEach(function (data) {
+            var isMatch  = false;
+            // 没有标题的文章使用预设的 i18n 变量代替
+            var title = (data.title && data.title.trim()) || '[ 文章无标题 ]';
+            var titleLower = title && title.toLowerCase();
+            // 删除 HTML 标签 和 所有空白字符
+            var content = data.content && data.content.replace(/<[^>]+>/g, '');
+            var contentLower = content && content.toLowerCase();
+            // 删除重复的 /
+            var postURL = data.url && decodeURI(data.url).replace(/\/{2,}/g, '/');
+            // 标题中匹配到的关键词
+            var titleHitSlice = [];
+            // 内容中匹配到的关键词
+            var contentHitSlice = [];
+
+            keywords.forEach(function (keyword) {
+              /**
+              * 获取匹配的关键词的索引
+              * @param {String} keyword 要匹配的关键字
+              * @param {String} text 原文字
+              * @param {Boolean} caseSensitive 是否区分大小写
+              * @param {Number} weight 匹配对象的权重。权重大的优先显示
+              * @return {Array}
+              */
+              function getIndexByword (word, text, caseSensitive, weight) {
+                if (!word || !text) {
+                  return [];
+                };
+
+                var startIndex = 0; // 每次匹配的开始索引
+                var index = -1;     // 匹配到的索引值
+                var result = [];    // 匹配结果
+
+                if (!caseSensitive) {
+                  word = word.toLowerCase();
+                  text = text.toLowerCase();
+                }
+
+                while((index = text.indexOf(word, startIndex)) !== -1) {
+                  var hasMatch = false;
+                  // 索引位置相同的关键词，保留长度较长的
+                  titleHitSlice.forEach(function (hit) {
+                    if (hit.index === index && hit.word.length < word.length) {
+                      hit.word = word;
+                      hasMatch = true;
+                    }
+                  });
+                  startIndex = index + word.length;
+                  !hasMatch && result.push({ index: index, word: word, weight: weight });
+                }
+                return result;
+              }
+              titleHitSlice = titleHitSlice.concat(getIndexByword(keyword, titleLower, false, WEIGHT.title));
+              contentHitSlice = contentHitSlice.concat(getIndexByword(keyword, contentLower, false, WEIGHT.content));
+            });
+
+            var hitTitle = titleHitSlice.length;
+            var hitContent = contentHitSlice.length;
+
+            if (hitTitle > 0 || hitContent > 0) {
+              isMatch = true;
+            }
+            if (isMatch) {
+              ;[titleHitSlice, contentHitSlice].forEach(function (hit) {
+                // 按照匹配文字的索引的递增顺序排序
+                hit.sort(function (left, right) {
+                  return left.index - right.index;
+                });
+              });
+              /**
+              * 给文本中匹配到的关键词添加标记，从而进行高亮显示
+              * @param {String} text 原文本
+              * @param {Array} hitSlice 匹配项的索引信息
+              * @param {Number} start 开始索引
+              * @param {Number} end 结束索引
+              * @return {String}
+              */
+              function highlightKeyword (text, hitSlice, start, end) {
+                if (!text || !hitSlice || !hitSlice.length) {
+                  return;
+                }
+
+                var result = '';
+                var startIndex = start;
+                var endIndex = end;
+                hitSlice.forEach(function (hit) {
+                  if (hit.index < startIndex) {
+                    return;
+                  }
+
+                  var hitWordEnd = hit.index + hit.word.length;
+                  result += text.slice(startIndex, hit.index);
+                  result += '<b>' + text.slice(hit.index, hitWordEnd) + '</b>';
+                  startIndex = hitWordEnd;
+                });
+                result += text.slice(startIndex, endIndex);
+                return result;
+              }
+
+              var postData = {};
+              // 文章总的搜索权重
+              var postWeight = titleHitSlice.length * WEIGHT.title + contentHitSlice.length * WEIGHT.content;
+              // 标记匹配关键词后的标题
+              var postTitle = highlightKeyword(title, titleHitSlice, 0, title.length) || title;
+              // 标记匹配关键词后的内容
+              var postContent;
+              // 显示内容的长度
+              var SHOW_WORD_LENGTH = 200;
+              // 命中关键词前的字符显示长度
+              var SHOW_WORD_FRONT_LENGTH = 20;
+              var SHOW_WORD_END_LENGTH = SHOW_WORD_LENGTH - SHOW_WORD_FRONT_LENGTH;
+
+              // 截取匹配的第一个字符，前后共 200 个字符来显示
+              if (contentHitSlice.length > 0) {
+                var firstIndex = contentHitSlice[0].index;
+                var start = firstIndex > SHOW_WORD_FRONT_LENGTH ? firstIndex - SHOW_WORD_FRONT_LENGTH : 0;
+                var end = firstIndex + SHOW_WORD_END_LENGTH;
+                postContent = highlightKeyword(content, contentHitSlice, start, end);
+              } else { // 未匹配到内容，直接截取前 200 个字符来显示
+                postContent = content.slice(0, SHOW_WORD_LENGTH);
+              }
+              postData.title = postTitle;
+              postData.content = postContent;
+              postData.url = postURL;
+              postData.weight = postWeight;
+              matchPosts.push(postData);
+            }
+          });
+        }
+
+        var resultInnerHtml = '';
+        if (matchPosts.length) {
+          // 按权重递增的顺序排序，使权重大的优先显示
+          matchPosts.sort(function (left, right) {
+            return right.weight - left.weight;
+          });
+          resultInnerHtml += '<ul>';
+          matchPosts.forEach(function (post) {
+            resultInnerHtml += '<li><a class="search-results-title" href="' + post.url + '">';
+            resultInnerHtml += post.title;
+            resultInnerHtml += '</a><div class="search-results-content">';
+            resultInnerHtml += post.content;
+            resultInnerHtml += '</div></li>';
+          });
+          resultInnerHtml += '</ul>';
+        } else {
+          resultInnerHtml += '<div class="search-results-none"><i class="far fa-meh"></i></div>';
+        }
+        $result.html(resultInnerHtml);
+      };
+      $input.on('input', searchPost);
+      $input.on('keyup', function (e) {
+        if (e.keyCode === Stun.utils.codeToKeyCode('Enter')) {
+          searchPost();
+        }
+      });
+    }
+  });
+}
+
+function closeSearch () {
+  $('body').css({ overflow: 'auto' });
+  $('.search-popup').css({ display: 'none' });
+  $('.search-mask').css({ display: 'none' });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+  Stun.utils.pjaxReloadLocalSearch = function () {
+    $('.header-nav-search').on('click', function (e) {
+      e.stopPropagation();
+      $('body').css('overflow', 'hidden');
+      $('.search-popup')
+        .velocity('stop')
+        .velocity('transition.expandIn', {
+          duration: 300,
+          complete: function () {
+            $('.search-popup input').focus();
+          }
+        });
+      $('.search-mask')
+        .velocity('stop')
+        .velocity('transition.fadeIn', {
+          duration: 300
+        });
+
+      initSearch();
+    });
+    $('.search-mask, .search-close').on('click', function () {
+      closeSearch();
+    });
+    $(document).on('keydown', function (e) {
+      // Escape <=> 27
+      if (e.keyCode === Stun.utils.codeToKeyCode('Escape')) {
+        closeSearch();
+      }
+    });
+  };
+
+  Stun.utils.pjaxReloadLocalSearch();
+}, false);
+
+function safeOpenUrl(url) {
+  var newTab = window.open();
+  newTab.opener = null;
+  newTab.location = url;
+}
+
+function extSearch(engine) {
+  var engines = {
+    google: 'https://www.google.com/search?q=',
+    bing: 'https://cn.bing.com/search?q=',
+    baidu: 'https://www.baidu.com/s?ie=UTF-8&wd=',
+  };
+  var host = window.location.host;
+  var query = $('.search-input input').val().toLowerCase().trim();
+  var uri = engines[engine] + query + ' site:' + host;
+
+  if (query) {
+    safeOpenUrl(uri);
+  } else {
+    Stun.utils.popAlert('warning', '请输入字符');
+  }
+}
+
+var assistSearchList = window.CONFIG.assistSearch;
+
+if (Array.isArray(assistSearchList)) {
+  assistSearchList.forEach(function (name) {
+    document.querySelector('.search-btns-item--' + name).addEventListener('click', function () {
+      extSearch(name);
+    }, false);
+  });
+}</script><script src="/js/utils.js?v=2.8.0"></script><script src="/js/stun-boot.js?v=2.8.0"></script><script src="/js/scroll.js?v=2.8.0"></script><script src="/js/header.js?v=2.8.0"></script><script src="/js/sidebar.js?v=2.8.0"></script><script type="application/json" src="/search.json"></script></body></html>
